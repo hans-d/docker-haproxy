@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # everything up to date
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list && \
     apt-get update && \
-    apt-get upgrade -y# everything up to date
+    apt-get upgrade -y
 
 # install haproxy
 RUN apt-get install -y haproxy
