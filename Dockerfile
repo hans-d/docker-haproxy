@@ -3,24 +3,25 @@ MAINTAINER Hans Donner <hans.donner@pobox.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-#RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list \
-
 # everything up to date
-RUN apt-get update && apt-get upgrade -y
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get upgrade -y# everything up to date
 
 # install haproxy
 RUN apt-get install -y haproxy
 
-# move default config
-RUN mv /etc/haproxy /etc/haproxy.def
+# add scripts and install dependencies
+RUN mkdir /docker
+ADD scripts /docker/scripts
+RUN chmod +x /docker/scripts/*
 
-# provide config via volume
+# config via volume
+RUN mv /etc/haproxy /etc/haproxy.def
 VOLUME /etc/haproxy
 
-# expose ports for haproxy
+# expose ports
 EXPOSE 80 8080 22 9000
 
-# start script
-ADD start.sh start
-RUN chmod +x start
-ENTRYPOINT ["./start"]
+# entrypoint
+ENTRYPOINT ["/docker/scripts/start"]
