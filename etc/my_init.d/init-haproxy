@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. /docker/scripts/functions
+
+status "Check config file"
+if [ ! -f /etc/haproxy/haproxy.cfg ]; then
+    status "No config file found"
+    cp -nR /etc/haproxy.def/* /etc/haproxy/.
+    status "Update the default config and restart"
+    exit 1
+fi
+
+/usr/sbin/haproxy -dbc -f /etc/haproxy/haproxy.cfg 2>&1 | grep Fatal && exit 1
+
+status "Ready"

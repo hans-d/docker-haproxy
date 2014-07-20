@@ -1,0 +1,16 @@
+FROM hansd/base:latest
+MAINTAINER Hans Donner <hans.donner@pobox.com> "https://github.com/hans-d"
+
+RUN apt-get install -y haproxy
+RUN apt-get install -y incron
+RUN mv /etc/haproxy /etc/haproxy.def && \
+    mkdir /etc/haproxy
+
+$IMPORT common/default-layout.docker
+$IMPORT common/add-etc.docker
+$IMPORT common/add-scripts.docker
+$IMPORT common/executable-init.docker
+$IMPORT common/disable-ssh.docker
+$IMPORT common/clean-apt.docker
+
+EXPOSE 80 8080 9000
