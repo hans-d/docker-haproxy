@@ -1,0 +1,1 @@
+ls /etc/hproxy/conf.d/*.conf | xargs -L1 sed -e '$s/$/\n/' > /etc/haproxy/haproxy.cfg

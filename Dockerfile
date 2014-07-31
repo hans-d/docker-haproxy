@@ -5,7 +5,7 @@ MAINTAINER Hans Donner <hans.donner@pobox.com> "https://github.com/hans-d"
 RUN apt-get install -y haproxy
 RUN apt-get install -y incron
 RUN mv /etc/haproxy /etc/haproxy.def && \
-    mkdir /etc/haproxy
+    mkdir -p /etc/haproxy/conf.d
 
 RUN mkdir -p /docker/scripts /docker/templates
 ADD common/scripts /docker/scripts
