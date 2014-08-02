@@ -2,6 +2,10 @@
 
 . /docker/scripts/functions
 
+status "Generate fresh config from fragments"
+/docker/scripts/reconfig-haproxy
+
+
 status "Check config file"
 if [ ! -f /etc/haproxy/haproxy.cfg ]; then
     status "No config file found"

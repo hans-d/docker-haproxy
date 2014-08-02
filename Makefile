@@ -11,7 +11,7 @@ CONTENT_FILES := $(filter-out $(ALL_TEMP_FILES), $(CONTENT_FILES))
 DOCKER_FRAGMENT_FILES := $(wildcard $(DOCKER_FRAGMENTS))
 
 
-.phony: git-sub build clean test-it
+.phony: git-sub build clean tar test-it
 
 Dockerfile: Dockerfile.docker $(DOCKER_FRAGMENT_FILES)
 	@echo Generate Dockerfile
@@ -21,6 +21,14 @@ Dockerfile: Dockerfile.docker $(DOCKER_FRAGMENT_FILES)
 
 build: Dockerfile
 	docker build --tag $(TAGNAME) . 
+
+$(TAGNAME).tar: Dockerfile build
+	docker save -o $(TAGNAME).tar $(TAGNAME)
+
+$(TAGNAME).tar.gz: $(TAGNAME).tar
+	gzip $(TA
+
+tar: $(TAGNAME).tar
 
 clean:
 	rm Dockerfile
