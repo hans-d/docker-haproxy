@@ -1,1 +1,15 @@
+#!/bin/sh
+
+if [ ! -f /var/run/haproxy/haproxy.pid ]; then
+    exit
+fi
+
+if [ -f /tmp/haproxy-reload ]; then
+    exit
+fi
+
+touch /tmp/haproxy-reload
+sleep 1
+rm /tmp/haproxy-reload
+
 haproxy -f /etc/haproxy/haproxy.cfg -p /var/run/haproxy.pid -sf $(cat /var/run/haproxy.pid) 
