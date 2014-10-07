@@ -1,2 +1,0 @@
-# /etc/haproxy IN_MOVE,IN_CLOSE,IN_CREATE,IN_DELETE /docker/scripts/reload-haproxy
-# /etc/haproxy/conf.d IN_MOVE,IN_CLOSE,IN_CREATE,IN_DELETE /docker/scripts/reconfig-haproxy
