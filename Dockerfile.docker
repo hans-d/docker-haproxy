@@ -12,7 +12,6 @@ RUN  curl -L https://github.com/hashicorp/consul-haproxy/releases/download/v0.1.
 
 $IMPORT common/default-layout.docker
 $IMPORT common/add-etc.docker
-$IMPORT common/add-scripts.docker
 $IMPORT common/executable-init.docker
 $IMPORT common/disable-ssh.docker
 $IMPORT common/clean-apt.docker
